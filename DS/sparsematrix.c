@@ -96,6 +96,7 @@ void fasttranspose(int compact[][3], int fast[][3]) {
     // non-zero elements in each column
     for (int i = 1; i <= t; i++)
         S[compact[i][1]]++;
+	// frequency array for no. of elements in each column
 
     // starting positions
     T[0] = 1;
@@ -128,8 +129,8 @@ void add(int a[][3], int b[][3], int sum[][3]) {
 	int i = 1, j = 1, k = 1;
 	
 	while (i <= t1 && j <= t2) {
-		if (a[i][0] == b[j][0]) {
-			if (a[i][1] == b[j][1]) {
+		if (a[i][0] == b[j][0]) { // same row
+			if (a[i][1] == b[j][1]) { // same column
 				int temp = a[i][2] + b[j][2];
 				if (temp != 0) {
 					sum[k][0] = a[i][0];
@@ -140,14 +141,14 @@ void add(int a[][3], int b[][3], int sum[][3]) {
 				i++;
 				j++;
 			}
-			else if (a[i][1] < b[j][1]) {
+			else if (a[i][1] < b[j][1]) { // same row, different column
 				sum[k][0] = a[i][0];
 				sum[k][1] = a[i][1];
 				sum[k][2] = a[i][2];
 				k++;
 				i++;
 			}
-			else {
+			else { // same row, different column
 				sum[k][0] = b[j][0];
 				sum[k][1] = b[j][1];
 				sum[k][2] = b[j][2];
@@ -155,14 +156,14 @@ void add(int a[][3], int b[][3], int sum[][3]) {
 				j++;
 			}
 		}
-		else if (a[i][0] < b[j][0]) {
+		else if (a[i][0] < b[j][0]) { // different row
 			sum[k][0] = a[i][0];
 			sum[k][1] = a[i][1];
 			sum[k][2] = a[i][2];
 			k++;
 			i++;
 		}
-		else {
+		else { // different row
 			sum[k][0] = b[j][0];
 			sum[k][1] = b[j][1];
 			sum[k][2] = b[j][2];
@@ -171,7 +172,7 @@ void add(int a[][3], int b[][3], int sum[][3]) {
 		}
 	}
 	
-	while (i <= t1) {
+	while (i <= t1) { // remaining elements in a
 		sum[k][0] = a[i][0];
 		sum[k][1] = a[i][1];
 		sum[k][2] = a[i][2];
@@ -179,7 +180,7 @@ void add(int a[][3], int b[][3], int sum[][3]) {
 		i++;
 	}
 	
-	while (j <= t2) {
+	while (j <= t2) { // remaining elements in b
 		sum[k][0] = b[j][0];
 		sum[k][1] = b[j][1];
 		sum[k][2] = b[j][2];
@@ -187,7 +188,7 @@ void add(int a[][3], int b[][3], int sum[][3]) {
 		j++;
 	}
 	
-	sum[0][2] = k - 1;
+	sum[0][2] = k - 1; // total number of non-zero elements
 } 
 
 
