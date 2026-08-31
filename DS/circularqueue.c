@@ -98,14 +98,14 @@ int main (void) {
 				if (isFull())
 					printf("Queue is full.\n");
 				else 
-                    			printf("Queue is not full.\n");
+                    printf("Queue is not full.\n");
 				break;
 			}
 			case 4: {
 				if (isEmpty())
 					printf("Queue is empty.\n");
 				else
-                    			printf("Queue is not empty.\n");
+                    printf("Queue is not empty.\n");
 				break;
 			}
 			case 5:
