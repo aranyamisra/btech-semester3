@@ -97,7 +97,7 @@ _start:
 	mov rsi, l
 	sldt [rsi]	
 	mov rax, [rsi]
-	call display64
+	call display16
 	
 	rw 1, 1, newl, 1
 	rw 1, 1, newl, 1
@@ -109,7 +109,7 @@ _start:
 	mov rsi, t
 	str [rsi]	
 	mov rax, [rsi]
-	call display64
+	call display16
 	
 	rw 1, 1, newl, 1
 	rw 1, 1, newl, 1
@@ -121,7 +121,7 @@ _start:
 	mov rsi, m
 	smsw [rsi]	
 	mov rax, [rsi]
-	call display64
+	call display16
 	
 	rw 1, 1, newl, 1
 	
