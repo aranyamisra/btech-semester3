@@ -67,8 +67,8 @@ next2:
 	
 	operate 1, [fd2], buff, [bufflen]		; write into file
 	
-	operate 3, [fd2], 0, 0				; close file 1
-	operate 3, [fd1], 0, 0				; close file 2
+	operate 3, [fd2], 0, 0				; close file 2
+	operate 3, [fd1], 0, 0				; close file 1
 	
 	operate 1, 1, success, successl
 	
