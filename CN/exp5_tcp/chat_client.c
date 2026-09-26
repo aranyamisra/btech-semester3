@@ -11,26 +11,32 @@ int main()
     char buffer[100];
     struct sockaddr_in server;
 
-    // 1. Create socket
     s = socket(AF_INET, SOCK_STREAM, 0);
 
-    // 2. Specify server IP and port
     server.sin_family = AF_INET;
     server.sin_port = htons(8080);
     server.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-    // 3. Connect to server
     connect(s, (struct sockaddr *)&server, sizeof(server));
 
-    // 4. Send data to server
-    strcpy(buffer, "Hello from Client");
-    send(s, buffer, strlen(buffer) + 1, 0);
+    while (1)
+    {
+        printf("Client: ");
+        fgets(buffer, sizeof(buffer), stdin);
+        buffer[strcspn(buffer, "\n")] = '\0';
 
-    // 5. Receive data from server
-    recv(s, buffer, sizeof(buffer), 0);
-    printf("Server: %s\n", buffer);
+        send(s, buffer, strlen(buffer) + 1, 0);
 
-    // 6. Close socket
+        if (strcmp(buffer, "exit") == 0)
+            break;
+
+        recv(s, buffer, sizeof(buffer), 0);
+        printf("Server: %s\n", buffer);
+
+        if (strcmp(buffer, "exit") == 0)
+            break;
+    }
+
     close(s);
 
     return 0;
