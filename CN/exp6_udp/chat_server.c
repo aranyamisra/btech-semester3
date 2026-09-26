@@ -19,19 +19,29 @@ int main()
 
     bind(s, (struct sockaddr *)&server, sizeof(server));
 
-    printf("Server waiting...\n");
+    printf("Server started. Waiting for client...\n");
 
-    recvfrom(s, buffer, sizeof(buffer), 0,
-             (struct sockaddr *)&client, &len);
+    while (1)
+    {
+        recvfrom(s, buffer, sizeof(buffer), 0,
+                 (struct sockaddr *)&client, &len);
 
-    printf("Client: %s\n", buffer);
+        printf("Client: %s\n", buffer);
 
-    strcpy(buffer, "Hello from Server");
+        if (strcmp(buffer, "exit") == 0)
+            break;
 
-    sendto(s, buffer, strlen(buffer) + 1, 0,
-           (struct sockaddr *)&client, len);
+        printf("Server: ");
+        fgets(buffer, sizeof(buffer), stdin);
+        buffer[strcspn(buffer, "\n")] = '\0';
+
+        sendto(s, buffer, strlen(buffer) + 1, 0,
+               (struct sockaddr *)&client, len);
+
+        if (strcmp(buffer, "exit") == 0)
+            break;
+    }
 
     close(s);
-
     return 0;
 }
