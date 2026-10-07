@@ -1,0 +1,51 @@
+;array addition
+mov R0, #10h
+mov R1, #05h
+mov A, @R0
+inc R0
+
+up:
+add A, @R0
+inc R0
+djnz R1, up
+
+; Program to generate a square wave on pin P1.0 using Timer 0, Mode 1
+ORG 0000H         ; Set origin to memory address 0000H
+START: 
+    MOV TMOD, #01H    ; Configure Timer 0 in Mode 1 (16-bit timer)
+    SETB P1.0         ; Set initial state of P1.0 to high
+
+MAIN_LOOP:
+    MOV TH0, #0FEH    ; Load higher byte of initial timer delay value
+    MOV TL0, #01EH    ; Load lower byte of initial timer delay value
+    SETB TR0          ; Start Timer 0
+
+WAIT_TIMER: 
+    JNB TF0, WAIT_TIMER ; Loop continuously until Timer 0 overflows (TF0 = 1)
+    
+    CLR TR0           ; Stop Timer 0
+    CLR TF0           ; Clear Timer 0 overflow flag
+    CPL P1.0          ; Complement/toggle pin P1.0 to form the square wave
+    SJMP MAIN_LOOP    ; Repeat the cycle indefinitely
+
+END
+
+
+;MA'AM'S CODE
+ORG 0100H
+
+MOV IE, #82H
+MOV TMOD, #01H
+MOV TL0, #0CH
+MOV TH0, #0FEH
+SETB TR0
+
+Here: SJMP Here
+
+ORG 00BH
+CPL P2.1
+CLR TR0
+MOV TL0, #0CH
+MOV TH0, #0FEH
+SETB TR0
+RETI
