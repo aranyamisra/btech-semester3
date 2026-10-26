@@ -65,6 +65,8 @@ void multiply(int a[10][10], int b[10][10], int r1, int c1, int c2) {
     display(result, r1, c2);
 }
 
+// c1 should = r2 for multiplication
+
 void transpose(int a[10][10], int r, int c) {
 	int result[10][10];
 
