@@ -11,15 +11,11 @@ struct job {
 int front = -1, rear = -1;
 
 bool isFull() {
-	if (rear == size - 1)
-		return true;
-	return false;
+	return (rear == size - 1);
 }
 
 bool isEmpty() {
-	if (front == rear) 
-		return true;
-	return false;
+	return (front == rear);
 }
 
 void enqueue(struct job q[], struct job elem) {
@@ -30,8 +26,6 @@ void enqueue(struct job q[], struct job elem) {
 		q[rear] = elem;
 	}
 }
-
-
 
 void dequeue(struct job q[]) {
 	if (isEmpty()) 

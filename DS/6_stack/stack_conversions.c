@@ -107,8 +107,7 @@ void in_post(char infix[], char postfix[]) {
                 }
             }
             else {
-                while (!isEmpty() &&
-                       isp_post(s[top]) >= icp_post(ch)) {
+                while (!isEmpty() && isp_post(s[top]) >= icp_post(ch)) {
                     postfix[k] = pop();
                     k++;
                 }
@@ -197,8 +196,7 @@ void in_pre(char infix[], char prefix[]) {
                 }
             }
             else {
-                while (!isEmpty() &&
-                       isp_pre(s[top]) > icp_pre(ch)) {
+                while (!isEmpty() && isp_pre(s[top]) > icp_pre(ch)) {
                     prefix[k] = pop();
                     k++;
                 }
@@ -376,8 +374,8 @@ int main() {
 				printexp(postfix);
 
 				break;
-			    }
-			    case 2: {
+			}
+			case 2: {
 				char infix[20], prefix[20];
 
 				printf("Enter an infix expression: ");
